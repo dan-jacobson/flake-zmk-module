@@ -6,18 +6,22 @@
     hold-time-ms = <5000>;
 };
 
+&usb {
+    status = "okay";
+};
+
 / {
     combos {
         compatible = "zmk,combos";
 
         bt_sel_3 {
-            bindings = <&bt3>;
+            bindings = <&bt3 0 0>;
             key-positions = <42 30>;
             layers = <2>;
         };
 
         bt_sel_4 {
-            bindings = <&bt4>;
+            bindings = <&bt4 0 0>;
             key-positions = <30 18>;
             layers = <2>;
         };
