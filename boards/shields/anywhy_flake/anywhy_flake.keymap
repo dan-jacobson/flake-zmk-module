@@ -35,6 +35,12 @@
             key-positions = <13 25>;
             layers = <3>;
         };
+
+        jk_escape {
+            bindings = <&kp ESC>;
+            key-positions = <19 20>;
+            layers = <0>;
+        };
     };
 
     macros {
