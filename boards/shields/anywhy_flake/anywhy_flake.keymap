@@ -6,10 +6,6 @@
     hold-time-ms = <5000>;
 };
 
-&usb {
-    status = "okay";
-};
-
 / {
     combos {
         compatible = "zmk,combos";
