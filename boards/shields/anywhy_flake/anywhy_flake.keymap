@@ -97,42 +97,18 @@
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+    };
 
-        left_mod: left_mod {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LEFT_MOD";
-            bindings = <&mo 1>, <&none>;
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "hold-preferred";
-        };
-
-        right_mod: right_mod {
-            compatible = "zmk,behavior-hold-tap";
-            label = "RIGHT_MOD";
-            bindings = <&mo 2>, <&none>;
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "hold-preferred";
-        };
-
-        both_mods: both_mods {
-            compatible = "zmk,behavior-mod-morph";
-            label = "BOTH_MODS";
-            bindings = <&left_mod 0 0>, <&mo 3>;
-            #binding-cells = <0>;
-            mods = <(MOD_RCTRL)>;
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
         };
     };
 
     combos {
         compatible = "zmk,combos";
-
-        fn_layer {
-            bindings = <&mo 3>;
-            key-positions = <left_mod_key right_mod_key>;
-            timeout-ms = <50>;
-        };
 
         bt_sel_3 {
             bindings = <&bt3 0 0>;
