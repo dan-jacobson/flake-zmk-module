@@ -3,63 +3,8 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
-    combos {
-        compatible = "zmk,combos";
-
-        bt_sel_3 {
-            bindings = <&bt3 0 0>;
-            key-positions = <42 30>;
-            layers = <2>;
-        };
-
-        bt_sel_4 {
-            bindings = <&bt4 0 0>;
-            key-positions = <30 18>;
-            layers = <2>;
-        };
-
-        jk_escape {
-            bindings = <&kp ESC>;
-            key-positions = <19 20>;
-            layers = <0>;
-        };
-    };
-
-    macros {
-        bt_clr_0: bt_clr_0 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&bt BT_SEL 0 &bt BT_CLR>;
-            label = "BT_CLR_0";
-        };
-
-        bt_clr_1: bt_clr_1 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&bt BT_SEL 1 &bt BT_CLR>;
-            label = "BT_CLR_1";
-        };
-
-        bt_clr_2: bt_clr_2 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&bt BT_SEL 2 &bt BT_CLR>;
-            label = "BT_CLR_2";
-        };
-
-        bt_clr_3: bt_clr_3 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&bt BT_SEL 3 &bt BT_CLR>;
-            label = "BT_CLR_3";
-        };
-
-        bt_clr_4: bt_clr_4 {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&bt BT_SEL 4 &bt BT_CLR>;
-            label = "BT_CLR_4";
-        };
+    &mt {
+        flavor = "balanced";
     };
 
     behaviors {
@@ -153,44 +98,150 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
+        left_mod: left_mod {
+            compatible = "zmk,behavior-hold-tap";
+            label = "LEFT_MOD";
+            bindings = <&mo 1>, <&none>;
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "hold-preferred";
+        };
+
+        right_mod: right_mod {
+            compatible = "zmk,behavior-hold-tap";
+            label = "RIGHT_MOD";
+            bindings = <&mo 2>, <&none>;
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "hold-preferred";
+        };
+
+        both_mods: both_mods {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BOTH_MODS";
+            bindings = <&left_mod 0 0>, <&mo 3>;
+            #binding-cells = <0>;
+            mods = <(MOD_RCTRL)>;
+        };
     };
+    
+    combos {
+        compatible = "zmk,combos";
+
+        fn_layer {
+            bindings = <&mo 3>;
+            key-positions = <left_mod_key right_mod_key>;
+            timeout-ms = <50>;
+        };
+
+        bt_sel_3 {
+            bindings = <&bt3 0 0>;
+            key-positions = <42 30>;
+            layers = <2>;
+        };
+
+        bt_sel_4 {
+            bindings = <&bt4 0 0>;
+            key-positions = <30 18>;
+            layers = <2>;
+        };
+
+        jk_escape {
+            bindings = <&kp ESC>;
+            key-positions = <19 20>;
+            layers = <0>;
+        };
+
+        shift_capslock {
+            bindings = <&kp CAPS>;
+            key-positions = <24 35>;
+            layers = <0>;
+        }
+    };
+
+    macros {
+        bt_clr_0: bt_clr_0 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0 &bt BT_CLR>;
+            label = "BT_CLR_0";
+        };
+
+        bt_clr_1: bt_clr_1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 1 &bt BT_CLR>;
+            label = "BT_CLR_1";
+        };
+
+        bt_clr_2: bt_clr_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 2 &bt BT_CLR>;
+            label = "BT_CLR_2";
+        };
+
+        bt_clr_3: bt_clr_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 3 &bt BT_CLR>;
+            label = "BT_CLR_3";
+        };
+
+        bt_clr_4: bt_clr_4 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 4 &bt BT_CLR>;
+            label = "BT_CLR_4";
+        };
+    };
+
 
     keymap {
         compatible = "zmk,keymap";
 
         base {
             bindings = <
-&kp GRAVE  &kp Q      &kp W     &kp E      &kp R      &kp T     &kp Y   &kp U      &kp I      &kp O     &kp P      &kp RGUI
+&kp GRAVE  &kp Q      &kp W     &kp E      &kp R      &kp T     &kp Y   &kp U      &kp I      &kp O     &kp P      &kp ESC
 &bspc_del  &kp A      &kp S     &kp D      &kp F      &kp G     &kp H   &kp J      &kp K      &kp L     &kp SEMI   &mt RGUI APOS
-&kp LSHFT  &lt 3 Z    &kp X     &kp C      &kp V      &kp B     &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH   &kp RSHFT
+&kp LSHFT  &lt 4 Z    &kp X     &kp C      &kp V      &kp B     &kp N   &kp M      &kp COMMA  &kp DOT   &kp FSLH   &kp RSHFT
            &kp LCTRL  &kp LALT  &kp LGUI   &kp ENTER  &mo 1     &mo 2   &kp SPACE  &kp TAB    &kp LALT  &kp LCTRL
             >;
         };
 
         num {
             bindings = <
-&none  &kp N1    &kp N2    &kp N3     &kp N4     &kp N5      &kp N6     &kp N7  &kp N8  &kp N9  &kp N0     &none
-&none  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &kp LBKT    &kp EQUAL  &kp N4  &kp N5  &kp N6  &kp MINUS  &none
+&none  &kp N1    &kp N2    &kp N3     &kp N4     &kp N5      &kp N6     &kp N7  &kp N8  &kp N9  &kp N0     &trans
+&trans &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &kp LBKT    &kp EQUAL  &kp N4  &kp N5  &kp N6  &kp MINUS  &none
 &trans &kp LEFT  &kp DOWN  &kp UP     &kp RIGHT  &kp RBKT    &kp GRAVE  &kp N1  &kp N2  &kp N3  &kp BSLH   &trans
-       &trans    &trans    &trans     &trans     &none       &none      &none   &trans  &trans  &trans
+       &trans    &trans    &trans     &trans     &trans      &trans     &trans  &trans  &trans  &trans
+            >;
+        };
+
+        symbol {
+            bindings = <
+&none  &kp EXCL  &kp AT  &kp HASH  &kp DOLLAR  &kp PRCNT    &kp CARET  &kp AMPS  &kp ASTRK   &kp LPAR    &kp RPAR      &trans
+&trans &none     &none   &none     &none       &none        &kp LEFT   &kp DOWN  &kp UP      &kp RIGHT   &none         &none
+&trans &none     &none   &none     &none       &none        &none      &none     &none       &none       &none         &trans
+       &trans    &trans  &trans    &none       &trans       &trans     &trans    &trans      &trans      &trans
             >;
         };
 
         fn {
             bindings = <
-&none  &kp F12  &kp F7  &kp F8  &kp F9  &soft_off         &none     &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_BRI_UP  &none
-&none  &kp F10  &kp F4  &kp F5  &kp F6  &kp CAPS          &kp LEFT  &kp DOWN    &kp UP        &kp RIGHT     &none         &none
+&none  &kp F12  &kp F7  &kp F8  &kp F9  &soft_off         &none     &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &kp C_BRI_UP  &trans
+&trans &kp F10  &kp F4  &kp F5  &kp F6  &kp CAPS          &kp LEFT  &kp DOWN    &kp UP        &kp RIGHT     &none         &none
 &trans &kp F11  &kp F1  &kp F2  &kp F3  &studio_unlock    &none     &kp C_PP    &kp C_PREV    &kp C_NEXT    &kp C_BRI_DN  &trans
-       &trans   &trans  &trans  &none   &none             &none     &bt0 0 0    &bt1 0 0      &bt2 0 0      &bt3 0 0
+       &trans   &trans  &trans  &none   &trans            &trans    &bt0 0 0    &bt1 0 0      &bt2 0 0      &bt3 0 0
             >;
         };
 
         code {
             bindings = <
-&none  &none   &none   &kp LBRC  &kp RBRC  &kp MINUS    &kp PLUS   &none     &none     &none   &none  &none
-&none  &none   &none   &kp LPAR  &kp RPAR  &kp UNDER    &kp EQUAL  &kp FSLH  &kp BSLH  &none   &none  &none
+&none  &none   &none   &kp LBRC  &kp RBRC  &kp MINUS    &kp PLUS   &none     &none     &none   &none  &trans
+&trans &none   &none   &kp LPAR  &kp RPAR  &kp UNDER    &kp EQUAL  &kp FSLH  &kp BSLH  &none   &none  &none
 &trans &none   &none   &kp LBKT  &kp RBKT  &kp TILDE    &kp PIPE   &kp LT    &kp GT    &none   &none  &trans
-       &trans  &trans  &trans    &none     &none        &none      &none     &none     &trans  &trans
+       &trans  &trans  &trans    &none     &trans       &trans     &none     &none     &trans  &trans
             >;
         };
 
