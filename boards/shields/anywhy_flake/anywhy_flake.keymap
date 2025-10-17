@@ -3,7 +3,7 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
-    &mt {
+    mt {
         flavor = "balanced";
     };
 
@@ -124,7 +124,7 @@
             mods = <(MOD_RCTRL)>;
         };
     };
-    
+
     combos {
         compatible = "zmk,combos";
 
